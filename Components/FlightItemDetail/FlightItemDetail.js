@@ -3,13 +3,9 @@ import { View, Text, StyleSheet, ScrollView, Dimensions } from "react-native";
 import data from '../Data/data'
 const { width } = Dimensions.get("window")
 const height = width * 0.8;
+
 class FlightList extends Component {
-  constructor (props) {
-    super(props)
-    (this.state = {
-      data: data
-    })
-  }
+ 
 
   render () {
     console.log('proooooops', this.props.navigation.state.params);
