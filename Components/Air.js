@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Text,TouchableOpacity } from "react-native";
 import FlightList from "./FlightList/FlightList";
-import seaData from './Data/seaData'
+import data from './Data/data'
 import {connect} from 'react-redux'
-class Sea extends Component {
+
+class Air extends Component {
   constructor(props) {
     super(props)
   
@@ -13,21 +14,24 @@ class Sea extends Component {
   }
   
 componentDidMount() {
-  // const action = { type: 'SET_SHIPMENT_LIST', value: this.props.data }
-  // this.props.dispatch(action)
+  console.log('componentDidMount Air page')
   this.setState({
-    data:seaData,
+    data:data,
   })
+  // const action = { type:'SET_SHIPMENT_LIST',value:data}
+  // this.props.dispatch(action)
+  // console.log('*******DidMount Air data',this.state.data)
 }
 
   handlePress = () => {
+    // console.log("this.props",this.props)
     this.props.navigation.navigate('FlightItemDetail')
   }
   render() { 
     return (
       <View style={styles.main_container}>
-      <Text>Sea Page</Text>
-        <FlightList handlePress={this.handlePress} data={this.state.data} />
+      <Text>Air Page</Text>
+        <FlightList handlePress={this.handlePress}  data={this.state.data} />
       </View>
     );
   }
@@ -42,4 +46,12 @@ const styles = StyleSheet.create({
     // opacity:0.3
   }
 });
-export default connect()(Sea);
+const MapStateToProps = state => {
+    // return state
+    return {
+      SearchOptions: state.SearchOptions,
+      filtredData: state.filtredData,
+      shipmentList: state.shipmentList
+    }
+  }
+export default connect(MapStateToProps)(Air);

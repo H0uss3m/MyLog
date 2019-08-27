@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, TextInput, TouchableOpacity, AsyncStorage } fro
 import {CheckBox, Card, CardItem, Container, Content, Header, Body} from "native-base";
 import { Icon } from 'react-native-elements'
 import { withNavigation } from 'react-navigation';
-import data from './Data/data'
 import {connect} from 'react-redux'
 var _ = require('lodash');
 
@@ -21,6 +20,7 @@ class Search extends Component {
     this.text=""
   }
   handleSearchOptions =(SearchOptions,text)=>{
+  // fill the optionList the the selected Ones
    let OptionList = []
      if (SearchOptions.pickUp === true){
       OptionList.push('PickUp')
@@ -41,20 +41,16 @@ class Search extends Component {
       OptionList.push('Docking')
     }
 
-    // console.log('Options array  = ', OptionList)
-    let filteredData = this.props.shipmentList.filter(el=>OptionList.includes(el.status))
-    // console.log('filteredData',filteredData)
+//     let filteredData = this.props.shipmentList.filter(el=>OptionList.includes(el.status))
+    console.log('OptionList',OptionList)
 
 const action = {type:"FILTERED_SHIPMENT",value:OptionList}
 this.props.dispatch(action)
-    // AsyncStorage.setItem('status','In Pregress')
-    // AsyncStorage.setItem('from','London')
-    console.log('redirection')
+// redirect to Home Screen
     this.props.navigation.navigate("AdminHomeScreen");
-    // this.props.navigation.navigate('App')
   }
   render () {
-    // console.log("Render Search Component")
+    console.log("Render Search Component")
     return (
       <Container>
         <View style={styles.main_search_container}>

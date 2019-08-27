@@ -8,7 +8,7 @@ import {
 } from 'react-navigation'
 import Login from '../Components/Login/Login'
 import Register from '../Components/Register/Register'
-import AdminHomeScreen from '../Components/AdminHomeScreen/AdminHomeScreen'
+import Air from '../Components/Air'
 import ClientHomeScreen from '../Components/ClientHomeScreen/ClientHomeScreen'
 import Sea from '../Components/Sea'
 import Search from '../Components/Search'
@@ -16,11 +16,10 @@ import FlightItemDetail from '../Components/FlightItemDetail/FlightItemDetail'
 import AuthLoadingScreen from '../Components/Login/AuthLoadingScreen'
 import { Icon } from 'react-native-elements'
 
-
 const ShipmentNavigator = createMaterialTopTabNavigator(
   {
     Air: {
-      screen: AdminHomeScreen,
+      screen: Air,
       navigationOptions: {
         tabBarIcon: () => {
           return <Icon type='font-awesome' name='plane' />
@@ -118,7 +117,7 @@ const AppStack = createStackNavigator({
       title: 'Search',
       headerTitleStyle: { flex: 1, textAlign: 'center' },
       headerRight: (
-        <TouchableOpacity onPress={()=>{console.log('clear all =',this.state)}} style={{ marginRight: 20, borderWidth: 1 }}>
+        <TouchableOpacity style={{ marginRight: 20, borderWidth: 1 }}>
           <Text>CLEAR ALL</Text>
         </TouchableOpacity>
       )
