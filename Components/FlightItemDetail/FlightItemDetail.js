@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, ScrollView, Dimensions } from "react-native";
-import data from '../Data/data'
 const { width } = Dimensions.get("window")
 const height = width * 0.8;
 
@@ -24,7 +23,7 @@ class FlightList extends Component {
       weight,
       volume,
       carrier
-    } = this.props.navigation.state.params.flightData;
+    } = this.props.navigation.state.params.flightData
     return (
       <View style={styles.main_container}>
         <View style={styles.detail_box_header}>

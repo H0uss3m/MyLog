@@ -44,7 +44,7 @@ class Search extends Component {
 //     let filteredData = this.props.shipmentList.filter(el=>OptionList.includes(el.status))
     console.log('OptionList',OptionList)
 
-const action = {type:"FILTERED_SHIPMENT",value:OptionList}
+const action = {type:"SET_FILTER_OPTIONS",value:OptionList}
 this.props.dispatch(action)
 // redirect to Home Screen
     this.props.navigation.navigate("AdminHomeScreen");
@@ -100,6 +100,10 @@ this.props.dispatch(action)
             </View>
             <Text style={{ color: "grey" }}>STATUS</Text>
             <Card>
+                <TouchableOpacity
+                 onPress={() => {
+                  this.setState({ pickUp: !this.state.pickUp })
+                }}>
               <CardItem body>
                 <CheckBox
                   title="Pick Up"
@@ -107,12 +111,14 @@ this.props.dispatch(action)
                   name="pickUp"
                   checkedColor="red"
                   checked={this.state.pickUp}
-                  onPress={() => {
-                    this.setState({ pickUp: !this.state.pickUp })
-                  }}
+                 
                 />
                 <Text style={styles.CardItemText}>Pick Up</Text>
               </CardItem>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => {
+                    this.setState({ docking: !this.state.docking });
+                  }}>
               <CardItem style={{ borderTopWidth: 1, borderBottomWidth: 1, borderColor: 'grey' }}body>
                 <CheckBox
                   title="Docking"
@@ -120,12 +126,14 @@ this.props.dispatch(action)
                   name="docking"
                   checkedColor="red"
                   checked={this.state.docking}
-                  onPress={() => {
-                    this.setState({ docking: !this.state.docking });
-                  }}
+                  
                 />
                 <Text style={styles.CardItemText}>Docking</Text>
               </CardItem>
+                </TouchableOpacity>
+                <TouchableOpacity  onPress={() => {
+                    this.setState({ departure: !this.state.departure });
+                  }}>
               <CardItem body>
                 <CheckBox
                   title="Departure"
@@ -133,12 +141,14 @@ this.props.dispatch(action)
                   name="departure"
                   checkedColor="red"
                   checked={this.state.departure}
-                  onPress={() => {
-                    this.setState({ departure: !this.state.departure });
-                  }}
+                 
                 />
                 <Text style={styles.CardItemText}>Departure</Text>
               </CardItem>
+                </TouchableOpacity>
+                <TouchableOpacity   onPress={() => {
+                    this.setState({ arrival: !this.state.arrival });
+                  }}>
               <CardItem style={{ borderTopWidth: 1, borderBottomWidth: 1, borderColor: 'grey' }} body>
                 <CheckBox
                   title="Arrival"
@@ -146,12 +156,14 @@ this.props.dispatch(action)
                   name="arrival"
                   checkedColor="red"
                   checked={this.state.arrival}
-                  onPress={() => {
-                    this.setState({ arrival: !this.state.arrival });
-                  }}
+                
                 />
                 <Text style={styles.CardItemText}>Arrival</Text>
               </CardItem>
+                </TouchableOpacity>
+                <TouchableOpacity   onPress={() => {
+                    this.setState({ clearance: !this.state.clearance });
+                  }}>
               <CardItem body>
                 <CheckBox
                   title="In Clearance"
@@ -159,12 +171,14 @@ this.props.dispatch(action)
                   name="clearance"
                   checkedColor="red"
                   checked={this.state.clearance}
-                  onPress={() => {
-                    this.setState({ clearance: !this.state.clearance });
-                  }}
+                
                 />
                 <Text style={styles.CardItemText}>In Clearance</Text>
               </CardItem>
+                </TouchableOpacity>
+                <TouchableOpacity   onPress={() => {
+                    this.setState({ delivery: !this.state.delivery });
+                  }}>
               <CardItem style={{ borderTopWidth: 1, borderBottomWidth: 1, borderColor: 'grey' }} body>
                 <CheckBox
                   title="Delivery"
@@ -172,14 +186,13 @@ this.props.dispatch(action)
                   name="delivery"
                   checkedColor="red"
                   checked={this.state.delivery}
-                  onPress={() => {
-                    this.setState({ delivery: !this.state.delivery });
-                  }}
+                
                 />
                 <Text style={styles.CardItemText}>Delivery</Text>
               </CardItem>
+                </TouchableOpacity>
 
-              <CardItem style={styles.button} body>
+                <CardItem style={styles.button} body>
                 <TouchableOpacity
                   style={styles.signInButton}
                   onPress={()=>{this.handleSearchOptions(this.state,this.text)}}

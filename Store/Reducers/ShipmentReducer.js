@@ -1,34 +1,39 @@
-const initialState = { shipmentList: [], filtredData: [], SearchOptions: [] }
+const initialState = { airShipmentList: [], seaShipmentList: [], SearchOptions: [] }
 
 function toggleShipment (state = initialState, action) {
   let nextState
   switch (action.type) {
-    case 'SET_SHIPMENT_LIST':
+    // set air shipment
+    case 'SET_AIR_SHIPMENT_LIST':
       nextState = {
         ...state,
-        shipmentList: action.value,
-        filtredData: action.value
+        airShipmentList: action.value
       }
       return nextState || state
-    case 'FILTERED_SHIPMENT':
-    // if options exist than filter the list else return the full list
+    // set sea shipment
+    case 'SET_SEA_SHIPMENT_LIST':
+      nextState = {
+        ...state,
+        seaShipmentList: action.value
+      }
+      return nextState || state
+    // set search options
+    case 'SET_FILTER_OPTIONS':
+      // if options exist than filter the list else return the full list
       // if (action.value.length > 0) {
       //   let filtredData = state.shipmentList.filter(el =>
       //     action.value.includes(el.status)
       //   )
-        nextState = {
-          ...state,
-          SearchOptions: action.value,
-          // filtredData: filtredData
-        }
-      // } else {
-      //   nextState = {
-      //     ...state,
-      //     SearchOptions: action.value,
-      //     filtredData: state.shipmentList
-      //   }
-      // }
+      nextState = {
+        ...state,
+        SearchOptions: action.value
+      }
       return nextState || state
+    case 'EDIT_SHIPMENT_ITEM':
+    // get shipment Index
+    // filter throw the shipment data
+    // set the new modification to shipment data
+    return nextState || state
     default:
       return state
   }

@@ -10,21 +10,22 @@ class FlightList extends Component {
   
   
   // loadData () {
-    
-    //   this.setState({
-      //     data: 
-      //     filtredData:
-      //   })
-      // }
+  //   const action ={type:'SET_SHIPMENT_LIST',value:this.props.data}
+  //   this.props.dispatch(action)
+  //     // this.setState({
+  //     //     data: 
+  //     //     filtredData:
+  //     //   })
+  //     }
       componentDidMount () {
         // this.loadData()
-        
+        console.log("******************reducers data**************",this.props)
         
         // console.log('componentDidMount',this.props.SearchOptions)
       }
       
       componentDidUpdate () {
-        console.log(' */*/*/* flightlist Data /*/*/*/*', this.props.data)
+        // console.log(' */*/*/* flightlist Data /*/*/*/*', this.props.data)
         // console.log(' this.props.data', this.props.data)
         
         // console.log('*******Did Update SearchOptions*******Update',this.props.shipmentList)
@@ -49,9 +50,9 @@ class FlightList extends Component {
             }
             return (
               <View style={styles.flightList_container}>
-      <Text>this.props.SearchOptions : {this.props.SearchOptions}</Text>
+      {/* <Text>this.props.SearchOptions : {this.props.SearchOptions}</Text> */}
         <FlatList
-          data={filtredData}
+          data={this.props.data}
           keyExtractor={(item, index) => item.id.toString()}
           renderItem={({ item }) => <FlightItem item={item} />}
         />
@@ -69,8 +70,8 @@ const MapStateToProps = state => {
   // return state
   return {
     SearchOptions: state.SearchOptions,
-    filtredData: state.filtredData,
-    shipmentList: state.shipmentList
+    seaShipmentList: state.seaShipmentList,
+    airShipmentList: state.airShipmentList
   }
 }
 export default connect(MapStateToProps)(FlightList)

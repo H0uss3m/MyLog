@@ -13,11 +13,20 @@ class Air extends Component {
     }
   }
   
+  loadData () {
+    const action ={type:'SET_AIR_SHIPMENT_LIST',value:data}
+    this.props.dispatch(action)
+      // this.setState({
+      //     data: 
+      //     airShipmentList:
+      //   })
+      }
 componentDidMount() {
   console.log('componentDidMount Air page')
-  this.setState({
-    data:data,
-  })
+  this.loadData()
+  // this.setState({
+  //   data:data,
+  // })
   // const action = { type:'SET_SHIPMENT_LIST',value:data}
   // this.props.dispatch(action)
   // console.log('*******DidMount Air data',this.state.data)
@@ -30,8 +39,8 @@ componentDidMount() {
   render() { 
     return (
       <View style={styles.main_container}>
-      <Text>Air Page</Text>
-        <FlightList handlePress={this.handlePress}  data={this.state.data} />
+      {/* <Text>Air Page</Text> */}
+        <FlightList handlePress={this.handlePress}  data={this.props.airShipmentList} />
       </View>
     );
   }
@@ -50,8 +59,8 @@ const MapStateToProps = state => {
     // return state
     return {
       SearchOptions: state.SearchOptions,
-      filtredData: state.filtredData,
-      shipmentList: state.shipmentList
+      seaShipmentList: state.seaShipmentList,
+      airShipmentList: state.airShipmentList
     }
   }
 export default connect(MapStateToProps)(Air);
