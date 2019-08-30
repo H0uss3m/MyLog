@@ -1,5 +1,5 @@
 import React from 'react'
-import { TouchableOpacity, Text, AsyncStorage } from 'react-native'
+import { TouchableOpacity, AsyncStorage } from 'react-native'
 import {
   createStackNavigator,
   createAppContainer,
@@ -112,16 +112,7 @@ const AppStack = createStackNavigator({
     }
   },
   Search: {
-    screen: Search,
-    navigationOptions: {
-      title: 'Search',
-      headerTitleStyle: { flex: 1, textAlign: 'center' },
-      headerRight: (
-        <TouchableOpacity style={{ marginRight: 20, borderWidth: 1 }}>
-          <Text>CLEAR ALL</Text>
-        </TouchableOpacity>
-      )
-    }
+    screen: Search
   }
 })
 

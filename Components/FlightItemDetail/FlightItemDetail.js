@@ -1,29 +1,18 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, ScrollView, Dimensions } from "react-native";
-const { width } = Dimensions.get("window")
+import { TextInput } from "react-native-gesture-handler";
+const { width } = Dimensions.get("window");
 const height = width * 0.8;
 
 class FlightList extends Component {
- 
+constructor(props){
+  super(props)
+  this.state={
+    isInEditMode:false
+  }
+}
 
-  render () {
-    console.log('proooooops', this.props.navigation.state.params);
-    // // console.log('Detail flightData  =',flightData)
-    const {
-      awb,
-      from,
-      to,
-      status,
-      depart,
-      arrival,
-      etd,
-      eta,
-      hwb,
-      nbre,
-      weight,
-      volume,
-      carrier
-    } = this.props.navigation.state.params.flightData
+  renderDefaultView = (awb,from,to,status,depart,arrival,etd,eta,hwb,nbre,weight,volume,carrier) => {
     return (
       <View style={styles.main_container}>
         <View style={styles.detail_box_header}>
@@ -129,6 +118,197 @@ class FlightList extends Component {
         </View>
       </View>
     );
+  };
+ 
+    renderEditView = (awb,from,to,status,depart,arrival,etd,eta,hwb,nbre,weight,volume,carrier) => {
+
+      return (
+        <View style={styles.main_container}>
+        <View style={styles.detail_box_header}>
+          <View style={styles.header_container}>
+            <Text style={styles.text}>
+              <Text style={styles.label}>AWB:</Text>
+              {awb}
+            </Text>
+            <Text style={styles.text}>
+              <Text style={styles.label}>From:</Text>
+              {from}
+            </Text>
+            <Text style={styles.text}>
+              <Text style={styles.label}>To:</Text>
+              {to}
+            </Text>
+            <Text style={styles.text}>
+              <Text style={styles.label}>Status:</Text>
+              {status}
+            </Text>
+          </View>
+          <View style={styles.flight_card}>
+            <View style={styles.flight_details}>
+              <View style={styles.item}>
+                <Text style={styles.card_label}>From :</Text>
+                <Text style={styles.card_text}>{depart}</Text>
+              </View>
+              <View style={styles.item}>
+                <Text style={styles.card_label}>To :</Text>
+                <Text style={styles.card_text}>{arrival}</Text>
+              </View>
+            </View>
+            <View style={styles.flight_schedual}>
+              <View style={styles.item}>
+                <Text style={styles.card_label}>ETD :</Text>
+                <TextInput
+                  style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
+                  onChangeText={text => this.setState({ etd:text })}
+                  value={etd}
+                  />
+               
+              </View>
+              <View style={styles.item}>
+                <Text style={styles.card_label}>ETA :</Text>
+                <TextInput
+                  style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
+                  onChangeText={text => this.setState({ eta:text })}
+                  value={eta}
+                  />
+             
+              </View>
+            </View>
+          </View>
+        </View>
+        <View style={styles.detail_box_body}>
+          <ScrollView
+            style={styles.scroll}
+            horizontal
+            pagingEnabled
+            showsHorizontalScrollIndicator={false}
+            >
+            {/* <View style={{width,height}}> */}
+            <View style={styles.item_scroll_1}>
+              <View style={styles.card_detail}>
+                <Text style={styles.card_detail_label}>Pick Up :</Text>
+                <TextInput
+                  style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
+                  onChangeText={text => this.setState({ eta:text })}
+                  value={eta}
+                  />
+              </View>
+              <View style={styles.card_detail}>
+                <Text style={styles.card_detail_label}>Docking :</Text>
+                <TextInput
+                  style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
+                  onChangeText={text => this.setState({ eta:text })}
+                  value={eta}
+                  />
+              </View>
+              <View style={styles.card_detail}>
+                <Text style={styles.card_detail_label}>Departure :</Text>
+                <TextInput
+                  style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
+                  onChangeText={text => this.setState({ eta:text })}
+                  value={eta}
+                  />
+              </View>
+              <View style={styles.card_detail}>
+                <Text style={styles.card_detail_label}>Arrival :</Text>
+                <TextInput
+                  style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
+                  onChangeText={text => this.setState({ eta:text })}
+                  value={eta}
+                  />
+              </View>
+              <View style={styles.card_detail}>
+                <Text style={styles.card_detail_label}>In Clearance :</Text>
+                <TextInput
+                  style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
+                  onChangeText={text => this.setState({ eta:text })}
+                  value={eta}
+                  />
+              </View>
+              <View style={styles.card_detail}>
+                <Text style={styles.card_detail_label}>Delivery :</Text>
+                <TextInput
+                  style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
+                  onChangeText={text => this.setState({ eta:text })}
+                  value={eta}
+                  />
+              </View>
+            </View>
+            <View style={styles.item_scroll}>
+              <View>
+                <Text style={styles.card_detail_label}>House Way Bill :</Text>
+                <TextInput
+                  style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
+                  onChangeText={text => this.setState({ hwb:text })}
+                  value={hwb}
+                  />
+              </View>
+              <View>
+                <Text style={styles.card_detail_label}>Nbre of parcel :</Text>
+               
+                <TextInput
+                  style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
+                  onChangeText={text => this.setState({ nbre:text })}
+                  value={nbre}
+                  />
+              </View>
+              <View>
+                <Text style={styles.card_detail_label}>Gross Weight :</Text>
+               
+                <TextInput
+                  style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
+                  onChangeText={text => this.setState({ weight:text })}
+                  value={weight}
+                  />
+              </View>
+              <View>
+                <Text style={styles.card_detail_label}>Volume :</Text>
+              
+                <TextInput
+                  style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
+                  onChangeText={text => this.setState({ volume:text })}
+                  value={volume}
+                  />
+              </View>
+              <View>
+                <Text style={styles.card_detail_label}>Carrier :</Text>
+               
+                <TextInput
+                  style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
+                  onChangeText={text => this.setState({ carrier:text })}
+                  value={carrier}
+                  />
+              </View>
+            </View>
+            {/* </View> */}
+          </ScrollView>
+        </View>
+      </View>
+    );
+  };
+  render() {
+    // console.log("proooooops", this.props.navigation.state.params);
+    // // console.log('Detail flightData  =',flightData)
+    const {
+      awb,
+      from,
+      to,
+      status,
+      depart,
+      arrival,
+      etd,
+      eta,
+      hwb,
+      nbre,
+      weight,
+      volume,
+      carrier
+    } = this.props.navigation.state.params.flightData;
+    return (
+      this.state.isInEditMode ? 
+      this.renderEditView(awb,from,to,status,depart,arrival,etd,eta,hwb,nbre,weight,volume,carrier):
+      this.renderDefaultView(awb,from,to,status,depart,arrival,etd,eta,hwb,nbre,weight,volume,carrier))
+  
   }
 }
 const styles = StyleSheet.create({

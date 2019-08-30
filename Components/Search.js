@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, AsyncStorage } from "react-native";
-import {CheckBox, Card, CardItem, Container, Content, Header, Body} from "native-base";
-import { Icon } from 'react-native-elements'
+import { View, Text, StyleSheet, TextInput, TouchableOpacity } from "react-native";
+import {CheckBox, Card, CardItem, Container} from "native-base";
 import { withNavigation } from 'react-navigation';
 import {connect} from 'react-redux'
 var _ = require('lodash');
@@ -10,13 +9,25 @@ class Search extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      pickUp: true,
+      pickUp: false,
       clearance: false,
       delivery: false,
       departure: false,
       arrival: false,
       docking: false
     };
+    this.text=""
+  }
+  clearFilter = () =>{
+    this.setState({
+      text:"",
+      pickUp: false,
+      clearance: false,
+      delivery: false,
+      departure: false,
+      arrival: false,
+      docking: false
+    })
     this.text=""
   }
   handleSearchOptions =(SearchOptions,text)=>{
@@ -49,8 +60,27 @@ this.props.dispatch(action)
 // redirect to Home Screen
     this.props.navigation.navigate("AdminHomeScreen");
   }
+  static navigationOptions = ({ navigation }) => {
+    const { params } = navigation.state
+    return {
+      title: 'Search',
+      headerTitleStyle: { flex: 1, textAlign: 'center' },
+      headerRight: (
+        <TouchableOpacity  onPress={() => params.clearFilter()} style={{ marginRight: 20, borderWidth: 1 }}>
+             <Text>CLEAR ALL</Text>
+          </TouchableOpacity>
+       
+      ),
+    };
+  };
+  componentWillMount() {
+    this.props.navigation.setParams({ clearFilter: this.clearFilter });
+  }
+  componentDidUpdate(){
+    console.log("Render Search Component componentDidUpdate this.text = ",this.text)
+  }
   render () {
-    console.log("Render Search Component")
+    console.log("Render Search Component this.text = ",this.text)
     return (
       <Container>
         <View style={styles.main_search_container}>
@@ -111,7 +141,9 @@ this.props.dispatch(action)
                   name="pickUp"
                   checkedColor="red"
                   checked={this.state.pickUp}
-                 
+                  onPress={() => {
+                    this.setState({ pickUp: !this.state.pickUp })
+                  }}
                 />
                 <Text style={styles.CardItemText}>Pick Up</Text>
               </CardItem>
@@ -126,7 +158,9 @@ this.props.dispatch(action)
                   name="docking"
                   checkedColor="red"
                   checked={this.state.docking}
-                  
+                  onPress={() => {
+                    this.setState({ docking: !this.state.docking });
+                  }}
                 />
                 <Text style={styles.CardItemText}>Docking</Text>
               </CardItem>
@@ -141,7 +175,9 @@ this.props.dispatch(action)
                   name="departure"
                   checkedColor="red"
                   checked={this.state.departure}
-                 
+                  onPress={() => {
+                    this.setState({ departure: !this.state.departure });
+                  }}
                 />
                 <Text style={styles.CardItemText}>Departure</Text>
               </CardItem>
@@ -156,12 +192,14 @@ this.props.dispatch(action)
                   name="arrival"
                   checkedColor="red"
                   checked={this.state.arrival}
-                
+                  onPress={() => {
+                    this.setState({ arrival: !this.state.arrival });
+                  }}
                 />
                 <Text style={styles.CardItemText}>Arrival</Text>
               </CardItem>
                 </TouchableOpacity>
-                <TouchableOpacity   onPress={() => {
+                <TouchableOpacity onPress={() => {
                     this.setState({ clearance: !this.state.clearance });
                   }}>
               <CardItem body>
@@ -171,7 +209,9 @@ this.props.dispatch(action)
                   name="clearance"
                   checkedColor="red"
                   checked={this.state.clearance}
-                
+                  onPress={() => {
+                    this.setState({ clearance: !this.state.clearance });
+                  }}
                 />
                 <Text style={styles.CardItemText}>In Clearance</Text>
               </CardItem>
@@ -186,7 +226,9 @@ this.props.dispatch(action)
                   name="delivery"
                   checkedColor="red"
                   checked={this.state.delivery}
-                
+                  onPress={() => {
+                    this.setState({ delivery: !this.state.delivery });
+                  }}
                 />
                 <Text style={styles.CardItemText}>Delivery</Text>
               </CardItem>
@@ -200,15 +242,6 @@ this.props.dispatch(action)
                   <Text style={styles.signInText}>SHOW RESULTS</Text>
                 </TouchableOpacity>
               </CardItem>
-              <Icon
-                type='font-awesome'
-                onPress={async () => {
-                  await AsyncStorage.clear()
-                  this.props.navigation.navigate('AuthLoading')
-                // console.log('logout')
-                }}
-                name='ban'
-              />
             </Card>
           </View>
         </View>
@@ -222,6 +255,7 @@ const styles = StyleSheet.create({
     padding: "2%",
     backgroundColor: "#DCDCDC"
   },
+
   CardItemText: {
     color: "grey",
     fontSize: 16,
