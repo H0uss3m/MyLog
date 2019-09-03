@@ -12,7 +12,7 @@ import {
 import { Icon } from "react-native-elements";
 import { withNavigation } from "react-navigation";
 import { TextInput } from "react-native-gesture-handler";
-
+import { connect } from 'react-redux'
 const { width } = Dimensions.get("window");
 const height = width * 0.8;
 
@@ -416,6 +416,7 @@ class FlightList extends Component {
     );
   };
   componentWillMount() {
+    console.log('******this.props.userStatus********',this.props)
     // setting navigation params to use it on the edit button
     this.props.navigation.setParams({
       changeEditMode: this.changeEditMode,
@@ -606,5 +607,9 @@ const styles = StyleSheet.create({
     marginBottom: "2%"
   }
 });
-
-export default withNavigation(FlightList);
+const MapStateToProps = state =>{
+  return {
+    userStatus:state.toggleUserStatus.userStatus
+  }
+}
+export default connect(MapStateToProps)(withNavigation(FlightList));

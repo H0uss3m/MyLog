@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Alert ,StyleSheet,AsyncStorage, Image, View ,Text,TouchableOpacity} from 'react-native';
 import { Input } from "react-native-elements";
 import { connect } from "react-redux"
+
 // user data 
 const userInfo={username:'user',password:'123456'} 
 const adminInfo={ username:'admin',password:'123456'} 
@@ -23,15 +24,16 @@ class Authentication extends Component {
       
         if(username.trim().toLocaleLowerCase()===adminInfo.username && password===adminInfo.password){
             // Alert.alert('Welcome', username, [{ text: 'Ok' }])
+            AsyncStorage.setItem('Logged',"adminConnected")
             const userStatus=AsyncStorage.getItem('Logged') 
-             AsyncStorage.setItem('Logged',"adminConnected")
-             let action = {type:'SET_ADMIN_STATUS',action:userStatus}
+            let action = {type:'SET_ADMIN_STATUS',value:"adminConnected"}
              this.props.dispatch(action)
             this.props.navigation.navigate('App',{userStatus:userStatus});
         }else if (username.trim().toLocaleLowerCase() === userInfo.username && password===userInfo.password ){
-          const userStatus=AsyncStorage.getItem('Logged') 
           AsyncStorage.setItem('Logged',"userConnected")
-           let action = {type:'SET_USER_STATUS',action:userStatus}
+          const userStatus=AsyncStorage.getItem('Logged')
+          // console.log('userStatus',userStatus) 
+           let action = {type:'SET_USER_STATUS',value:"userConnected"}
            this.props.dispatch(action)
           this.props.navigation.navigate('clientInterface',{userStatus:userStatus});
         }
@@ -186,10 +188,5 @@ class Authentication extends Component {
       marginBottom : 20
     },
   });
-const MapStateToProps = state =>{
-  return {
-    userStatus: state.userStatusReducer.userStatus
-  }
-}
 
-  export default connect(MapStateToProps)(Authentication)
+  export default connect()(Authentication)
