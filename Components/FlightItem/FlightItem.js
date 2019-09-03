@@ -4,10 +4,16 @@ import { withNavigation } from 'react-navigation';
 class FlightList extends Component {
   
   handlePress = flightData => {
-    // console.log("pressed props",flightData)
-    this.props.navigation.navigate("FlightItemDetail", {
-      flightData: flightData
-    });
+    const userStatus=AsyncStorage.getItem('Logged')
+    if(userStatus ==='adminConnected'){
+      this.props.navigation.navigate("FlightItemDetail", {
+        flightData: flightData
+      });
+    } else if(userStatus==='userConnected'){
+      this.props.navigation.navigate("FlightItemDetail", {
+        flightData: flightData
+      });
+    }
   };
   render() {
     // console.log('Item Id  =', this.props.item.id)

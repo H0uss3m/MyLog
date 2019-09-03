@@ -24,26 +24,6 @@ class FlightList extends Component {
     };
     this.defaultValue="24/02/2015 at 15:14"
   }
-  // componentDidMount(){
-  //   const action = { type:'EDIT_SHIPMENT_ITEM', value:this.state.isInEditMode }
-  //   this.props.dispatch(action)
-  // }
-  // set Navigation bar Options
-  // static navigationOptions = ({ navigation }) => {
-  //   const { params } = navigation.state
-  //   return {
-
-  //     navigationOptions: {
-  //       title: 'Log Reference',
-  //       headerTitleStyle: { flex: 1, textAlign: 'center' },
-  //       headerRight: (
-  //         <TouchableOpacity onPress={() => params.changeEditMode()} style={{ marginRight: 20 }}>
-  //           <Icon type='font-awesome' name='pencil' />
-  //         </TouchableOpacity>
-  //       )
-  //     }
-  //   };
-  // };
   static navigationOptions = ({ navigation }) => {
     const { params } = navigation.state;
 
