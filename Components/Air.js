@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text,TouchableOpacity } from "react-native";
+import { View, StyleSheet, Text,TouchableOpacity,AsyncStorage } from "react-native";
 import FlightList from "./FlightList/FlightList";
 import data from './Data/data'
 import {connect} from 'react-redux'
@@ -18,7 +18,6 @@ class Air extends Component {
     this.props.dispatch(action)
       }
 componentDidMount() {
-  // console.log('componentDidMount Air page')
   this.loadData()
 }
 
@@ -46,8 +45,8 @@ const styles = StyleSheet.create({
 const MapStateToProps = state => {
     // return state
     return {
-      SearchOptions: state.SearchOptions,
-      airShipmentList: state.airShipmentList
+      SearchOptions: state.toggleShipment.SearchOptions,
+      airShipmentList: state.toggleShipment.airShipmentList
     }
   }
 export default connect(MapStateToProps)(Air);

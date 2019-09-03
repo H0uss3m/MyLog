@@ -294,7 +294,7 @@ const styles = StyleSheet.create({
 const MapStateToProps = (state) =>{
   // return state
   return {
-    shipmentList: state.shipmentList
+    shipmentList: toggleShipment.shipmentList
   }
 }
 export default withNavigation(connect(MapStateToProps)(Search));

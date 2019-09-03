@@ -1,12 +1,16 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, FlatList, Button } from 'react-native'
+import { View, StyleSheet, FlatList, AsyncStorage } from 'react-native'
 import FlightItem from '../FlightItem/FlightItem'
 // import { withNavigation } from 'react-navigation'
 import { connect } from 'react-redux'
+
 var _ = require('lodash')
 
 class FlightList extends Component {
   render () {
+    // console.log('List Page Logged AsyncStorage = ',AsyncStorage.getItem('Logged'))
+
+    // const { userStatus } = .userStatus
     let filtredData
     if (this.props.SearchOptions.length > 0) {
       filtredData = this.props.data.filter(el =>
@@ -37,7 +41,7 @@ const styles = StyleSheet.create({
 const MapStateToProps = state => {
   // return state
   return {
-    SearchOptions: state.SearchOptions
+    SearchOptions: state.toggleShipment.SearchOptions
   }
 }
 export default connect(MapStateToProps)(FlightList)

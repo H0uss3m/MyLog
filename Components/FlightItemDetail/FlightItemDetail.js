@@ -6,7 +6,8 @@ import {
   StyleSheet,
   ScrollView,
   Dimensions,
-  TouchableOpacity
+  TouchableOpacity,
+  AsyncStorage
 } from "react-native";
 import { Icon } from "react-native-elements";
 import { withNavigation } from "react-navigation";
@@ -26,16 +27,18 @@ class FlightList extends Component {
   }
   static navigationOptions = ({ navigation }) => {
     const { params } = navigation.state;
-
-    if (!params.isInEditMode) {
-      return {
-        title: "Log Reference",
-        headerTitleStyle: { flex: 1, textAlign: "center" },
-        headerRight: (
-          <TouchableOpacity
-            onPress={() => params.changeEditMode()}
-            style={{ marginRight: 20, borderWidth: 1 }}
-          >
+    // const {userStatus}=this.props.navigation.state.params
+    // console.log("***********userStatus**********",userStatus)
+// if(userStatus==='adminConnected'){
+  if (!params.isInEditMode ) {
+    return {
+      title: "Log Reference",
+      headerTitleStyle: { flex: 1, textAlign: "center" },
+      headerRight: (
+        <TouchableOpacity
+        onPress={() => params.changeEditMode()}
+        style={{ marginRight: 20, borderWidth: 1 }}
+        >
             <Icon type="font-awesome" name="pencil" />
           </TouchableOpacity>
         )
@@ -46,14 +49,15 @@ class FlightList extends Component {
         headerTitleStyle: { flex: 1, textAlign: "center" },
         headerRight: (
           <TouchableOpacity
-            onPress={() => params.changeEditMode()}
-            style={{ marginRight: 20, borderWidth: 1 }}
+          onPress={() => params.changeEditMode()}
+          style={{ marginRight: 20, borderWidth: 1 }}
           >
             <Text>Save</Text>
           </TouchableOpacity>
         )
       };
-    }
+    // }
+  } 
   };
   // handle edit mode
   changeEditMode = () => {
@@ -415,7 +419,8 @@ class FlightList extends Component {
     // setting navigation params to use it on the edit button
     this.props.navigation.setParams({
       changeEditMode: this.changeEditMode,
-      isInEditMode: this.state.isInEditMode
+      isInEditMode: this.state.isInEditMode,
+      userStatus:AsyncStorage.getItem('Logged')
     });
   }
 

@@ -9,15 +9,15 @@ class AuthLoadingScreen extends Component {
   }
   // redirect the app to the right navigation Screen 
   loadData = async()=>{
-    const Logged = await AsyncStorage.getItem('Logged')
-    switch (Logged) {
+    const userStatus = await AsyncStorage.getItem('Logged')
+    switch (userStatus) {
       // if the user is admin redirect to the admin screen
       case 'adminConnected':
-        return  this.props.navigation.navigate( 'App' )
+        return  this.props.navigation.navigate( 'App')
         break;
       // if the user is a simple user redirect to the admin screen
       case 'userConnected':
-         return this.props.navigation.navigate( 'clientInterface' )
+         return this.props.navigation.navigate( 'clientInterface')
 
         break;
       // default Screen 'Login'

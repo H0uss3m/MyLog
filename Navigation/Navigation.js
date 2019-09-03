@@ -108,7 +108,7 @@ const AppStack = createStackNavigator({
 })
 
 const ClientStack = createStackNavigator({
-  ClientHomeScreen:{
+  ClientHomeScreen: {
     screen: ShipmentNavigator,
     navigationOptions: ({ navigation }) => ({
       title: 'ShipmentList',
@@ -127,7 +127,7 @@ const ClientStack = createStackNavigator({
         </TouchableOpacity>
       )
     })
-  },
+  }
 })
 
 export default createAppContainer(

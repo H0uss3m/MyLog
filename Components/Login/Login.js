@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Alert ,StyleSheet,AsyncStorage, Image, View ,Text,TouchableOpacity} from 'react-native';
 import { Input } from "react-native-elements";
-
-// uer data 
+import { connect } from "react-redux"
+// user data 
 const userInfo={username:'user',password:'123456'} 
 const adminInfo={ username:'admin',password:'123456'} 
 
-export default class Authentication extends Component {
+class Authentication extends Component {
 
     constructor(props) {
         super(props);
@@ -16,18 +16,24 @@ export default class Authentication extends Component {
         };
     }
    // check the type of user (admin , user , driver )
-    checkLogin = async () => {
+    checkLogin = () => {
         const { username, password } = this.state;
         // console.log(username,' ',password)
         // console.log(userInfo.username,' ',userInfo.password)
-
+      
         if(username.trim().toLocaleLowerCase()===adminInfo.username && password===adminInfo.password){
             // Alert.alert('Welcome', username, [{ text: 'Ok' }])
-            await AsyncStorage.setItem('Logged',"adminConnected")
-            this.props.navigation.navigate('App');
+            const userStatus=AsyncStorage.getItem('Logged') 
+             AsyncStorage.setItem('Logged',"adminConnected")
+             let action = {type:'SET_ADMIN_STATUS',action:userStatus}
+             this.props.dispatch(action)
+            this.props.navigation.navigate('App',{userStatus:userStatus});
         }else if (username.trim().toLocaleLowerCase() === userInfo.username && password===userInfo.password ){
-          await AsyncStorage.setItem('Logged',"userConnected")
-          this.props.navigation.navigate('clientInterface');
+          const userStatus=AsyncStorage.getItem('Logged') 
+          AsyncStorage.setItem('Logged',"userConnected")
+           let action = {type:'SET_USER_STATUS',action:userStatus}
+           this.props.dispatch(action)
+          this.props.navigation.navigate('clientInterface',{userStatus:userStatus});
         }
         else{
             Alert.alert('Error', 'UserName/Login mismatch', [{ text: 'Ok' }])
@@ -180,3 +186,10 @@ export default class Authentication extends Component {
       marginBottom : 20
     },
   });
+const MapStateToProps = state =>{
+  return {
+    userStatus: state.userStatusReducer.userStatus
+  }
+}
+
+  export default connect(MapStateToProps)(Authentication)

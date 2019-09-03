@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text,TouchableOpacity } from "react-native";
+import { View, StyleSheet, Text,TouchableOpacity,AsyncStorage } from "react-native";
 import FlightList from "./FlightList/FlightList";
 import seaData from './Data/seaData'
 import {connect} from 'react-redux'
@@ -41,8 +41,8 @@ const styles = StyleSheet.create({
 });
 const MapStateToProps = state => {
   return {
-    SearchOptions: state.SearchOptions,
-    seaShipmentList: state.seaShipmentList,
+    SearchOptions: state.toggleShipment.SearchOptions,
+    seaShipmentList: state.toggleShipment.seaShipmentList,
   }
 }
 export default connect(MapStateToProps)(Sea);

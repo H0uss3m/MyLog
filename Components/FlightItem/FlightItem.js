@@ -1,19 +1,14 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, AsyncStorage } from "react-native";
 import { withNavigation } from 'react-navigation';
 class FlightList extends Component {
   
   handlePress = flightData => {
-    const userStatus=AsyncStorage.getItem('Logged')
-    if(userStatus ==='adminConnected'){
-      this.props.navigation.navigate("FlightItemDetail", {
-        flightData: flightData
-      });
-    } else if(userStatus==='userConnected'){
-      this.props.navigation.navigate("FlightItemDetail", {
-        flightData: flightData
-      });
-    }
+
+    this.props.navigation.navigate("FlightItemDetail", {
+      flightData: flightData
+    });
+   
   };
   render() {
     // console.log('Item Id  =', this.props.item.id)
