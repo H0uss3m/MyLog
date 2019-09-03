@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Alert ,StyleSheet,AsyncStorage, Image, View ,Text,TouchableOpacity} from 'react-native';
 import { Input } from "react-native-elements";
 
 // uer data 
 const userInfo={username:'user',password:'123456'} 
 const adminInfo={ username:'admin',password:'123456'} 
-export default class Authentication extends React.Component {
+
+export default class Authentication extends Component {
 
     constructor(props) {
         super(props);

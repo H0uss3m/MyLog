@@ -30,9 +30,10 @@ function toggleShipment (state = initialState, action) {
       }
       return nextState || state
     case 'EDIT_SHIPMENT_ITEM':
-    // get shipment Index
-    // filter throw the shipment data
-    // set the new modification to shipment data
+    nextState = {
+      ...state,
+      isInEditMode: action.value
+    }
     return nextState || state
     default:
       return state

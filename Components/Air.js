@@ -16,30 +16,18 @@ class Air extends Component {
   loadData () {
     const action ={type:'SET_AIR_SHIPMENT_LIST',value:data}
     this.props.dispatch(action)
-      // this.setState({
-      //     data: 
-      //     airShipmentList:
-      //   })
       }
 componentDidMount() {
-  console.log('componentDidMount Air page')
+  // console.log('componentDidMount Air page')
   this.loadData()
-  // this.setState({
-  //   data:data,
-  // })
-  // const action = { type:'SET_SHIPMENT_LIST',value:data}
-  // this.props.dispatch(action)
-  // console.log('*******DidMount Air data',this.state.data)
 }
 
   handlePress = () => {
-    // console.log("this.props",this.props)
     this.props.navigation.navigate('FlightItemDetail')
   }
   render() { 
     return (
       <View style={styles.main_container}>
-      {/* <Text>Air Page</Text> */}
         <FlightList handlePress={this.handlePress}  data={this.props.airShipmentList} />
       </View>
     );
@@ -59,7 +47,6 @@ const MapStateToProps = state => {
     // return state
     return {
       SearchOptions: state.SearchOptions,
-      seaShipmentList: state.seaShipmentList,
       airShipmentList: state.airShipmentList
     }
   }

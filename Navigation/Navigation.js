@@ -100,20 +100,34 @@ const AppStack = createStackNavigator({
     })
   },
   FlightItemDetail: {
-    screen: FlightItemDetail,
-    navigationOptions: {
-      title: 'Log Reference',
-      headerTitleStyle: { flex: 1, textAlign: 'center' },
-      headerRight: (
-        <TouchableOpacity style={{ marginRight: 20 }}>
-          <Icon type='font-awesome' name='pencil' />
-        </TouchableOpacity>
-      )
-    }
+    screen: FlightItemDetail
   },
   Search: {
     screen: Search
   }
+})
+
+const ClientStack = createStackNavigator({
+  ClientHomeScreen:{
+    screen: ShipmentNavigator,
+    navigationOptions: ({ navigation }) => ({
+      title: 'ShipmentList',
+      headerTitleStyle: { flex: 1, textAlign: 'center' },
+      headerLeft: (
+        <TouchableOpacity style={{ marginLeft: 10 }}>
+          <Icon
+            type='font-awesome'
+            onPress={async () => {
+              await AsyncStorage.clear()
+              navigation.navigate('AuthLoading')
+              // console.log('logout')
+            }}
+            name='ban'
+          />
+        </TouchableOpacity>
+      )
+    })
+  },
 })
 
 export default createAppContainer(
@@ -121,7 +135,7 @@ export default createAppContainer(
     {
       AuthLoading: AuthLoadingScreen,
       App: AppStack,
-      clientInterface: ClientHomeScreen,
+      clientInterface: ClientStack,
       Auth: AuthStack
     },
     {

@@ -1,18 +1,110 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, ScrollView, Dimensions } from "react-native";
+import {
+  View,
+  Button,
+  Text,
+  StyleSheet,
+  ScrollView,
+  Dimensions,
+  TouchableOpacity
+} from "react-native";
+import { Icon } from "react-native-elements";
+import { withNavigation } from "react-navigation";
 import { TextInput } from "react-native-gesture-handler";
+
 const { width } = Dimensions.get("window");
 const height = width * 0.8;
 
 class FlightList extends Component {
-constructor(props){
-  super(props)
-  this.state={
-    isInEditMode:false
+  constructor(props) {
+    super(props);
+    this.state = {
+      isInEditMode: false,
+      eta: "24/02/2015 at 15:14"
+    };
+    this.defaultValue="24/02/2015 at 15:14"
   }
-}
+  // componentDidMount(){
+  //   const action = { type:'EDIT_SHIPMENT_ITEM', value:this.state.isInEditMode }
+  //   this.props.dispatch(action)
+  // }
+  // set Navigation bar Options
+  // static navigationOptions = ({ navigation }) => {
+  //   const { params } = navigation.state
+  //   return {
 
-  renderDefaultView = (awb,from,to,status,depart,arrival,etd,eta,hwb,nbre,weight,volume,carrier) => {
+  //     navigationOptions: {
+  //       title: 'Log Reference',
+  //       headerTitleStyle: { flex: 1, textAlign: 'center' },
+  //       headerRight: (
+  //         <TouchableOpacity onPress={() => params.changeEditMode()} style={{ marginRight: 20 }}>
+  //           <Icon type='font-awesome' name='pencil' />
+  //         </TouchableOpacity>
+  //       )
+  //     }
+  //   };
+  // };
+  static navigationOptions = ({ navigation }) => {
+    const { params } = navigation.state;
+
+    if (!params.isInEditMode) {
+      return {
+        title: "Log Reference",
+        headerTitleStyle: { flex: 1, textAlign: "center" },
+        headerRight: (
+          <TouchableOpacity
+            onPress={() => params.changeEditMode()}
+            style={{ marginRight: 20, borderWidth: 1 }}
+          >
+            <Icon type="font-awesome" name="pencil" />
+          </TouchableOpacity>
+        )
+      };
+    } else {
+      return {
+        title: "Log Reference",
+        headerTitleStyle: { flex: 1, textAlign: "center" },
+        headerRight: (
+          <TouchableOpacity
+            onPress={() => params.changeEditMode()}
+            style={{ marginRight: 20, borderWidth: 1 }}
+          >
+            <Text>Save</Text>
+          </TouchableOpacity>
+        )
+      };
+    }
+  };
+  // handle edit mode
+  changeEditMode = () => {
+    this.setState(
+      {
+        isInEditMode: !this.state.isInEditMode,
+      },
+      () => {
+        this.props.navigation.setParams({
+          isInEditMode: this.state.isInEditMode
+        });
+      }
+    );
+  };
+
+  // the view when the edit mode is off
+  renderDefaultView = (
+    awb,
+    from,
+    to,
+    status,
+    depart,
+    arrival,
+    etd,
+    eta,
+    hwb,
+    nbre,
+    weight,
+    volume,
+    carrier
+  ) => {
     return (
       <View style={styles.main_container}>
         <View style={styles.detail_box_header}>
@@ -68,7 +160,9 @@ constructor(props){
             <View style={styles.item_scroll_1}>
               <View style={styles.card_detail}>
                 <Text style={styles.card_detail_label}>Pick Up :</Text>
-                <Text style={styles.card_detail_schedual}>{eta}</Text>
+                <Text style={styles.card_detail_schedual}>
+                  {this.state.eta}
+                </Text>
               </View>
               <View style={styles.card_detail}>
                 <Text style={styles.card_detail_label}>Docking :</Text>
@@ -119,11 +213,24 @@ constructor(props){
       </View>
     );
   };
- 
-    renderEditView = (awb,from,to,status,depart,arrival,etd,eta,hwb,nbre,weight,volume,carrier) => {
-
-      return (
-        <View style={styles.main_container}>
+  // the view when the edit mode is on
+  renderEditView = (
+    awb,
+    from,
+    to,
+    status,
+    depart,
+    arrival,
+    etd,
+    eta,
+    hwb,
+    nbre,
+    weight,
+    volume,
+    carrier
+  ) => {
+    return (
+      <View style={styles.main_container}>
         <View style={styles.detail_box_header}>
           <View style={styles.header_container}>
             <Text style={styles.text}>
@@ -159,19 +266,17 @@ constructor(props){
                 <Text style={styles.card_label}>ETD :</Text>
                 <TextInput
                   style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
-                  onChangeText={text => this.setState({ etd:text })}
+                  onChangeText={text => this.setState({ etd: text })}
                   value={etd}
-                  />
-               
+                />
               </View>
               <View style={styles.item}>
                 <Text style={styles.card_label}>ETA :</Text>
                 <TextInput
                   style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
-                  onChangeText={text => this.setState({ eta:text })}
+                  onChangeText={text => this.setState({ eta: text })}
                   value={eta}
-                  />
-             
+                />
               </View>
             </View>
           </View>
@@ -182,18 +287,62 @@ constructor(props){
             horizontal
             pagingEnabled
             showsHorizontalScrollIndicator={false}
-            >
+          >
             {/* <View style={{width,height}}> */}
             <View style={styles.item_scroll_1}>
               <View style={styles.card_detail}>
                 <Text style={styles.card_detail_label}>Pick Up :</Text>
-                <TextInput
-                  style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
-                  onChangeText={text => this.setState({ eta:text })}
-                  value={eta}
+
+                <View style={{flexDirection:'row'}} >
+                 <View>
+
+                  <TextInput
+                    style={{
+                      height: 40,
+                      borderColor: "gray",
+                      borderWidth: 1,
+                      width:"85%"
+                    }}
+                    onChangeText={(text)=>this.defaultValue=text}
+                    value={this.state.eta}
+                    />
+                    </View>
+                    <View >
+                    <Icon 
+                    type="font-awesome" 
+                    name="check"
+                    onPress={() => console.log("save change ")} 
+                    style={{color:'green'}}
+                    />
+                   
+                    </View>
+                    <View >
+                    <Icon 
+                    type="font-awesome" 
+                    name="exclamation"
+                    onPress={() => console.log("remove change ")}
+                    style={{color:'red'}}
+                    />
+                   
+                    {/* <Button
+                    onPress={() => console.log("remove change ")}
+                    style={{backgroundColor:'green',width:50}}
+                    title="!"
+                  /> */}
+                    </View>
+                  {/* <Button
+                    onPress={() => console.log("save change ")}
+                    title="V"
                   />
+
+                  <Button
+                    onPress={() => console.log("remove change ")}
+                    style={{ backgroundColor: "red" }}
+                    title="!"
+                  /> */}
+                </View>
               </View>
-              <View style={styles.card_detail}>
+              {/* <View style={styles.card_detail}>
                 <Text style={styles.card_detail_label}>Docking :</Text>
                 <TextInput
                   style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
@@ -245,7 +394,6 @@ constructor(props){
               </View>
               <View>
                 <Text style={styles.card_detail_label}>Nbre of parcel :</Text>
-               
                 <TextInput
                   style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
                   onChangeText={text => this.setState({ nbre:text })}
@@ -254,7 +402,6 @@ constructor(props){
               </View>
               <View>
                 <Text style={styles.card_detail_label}>Gross Weight :</Text>
-               
                 <TextInput
                   style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
                   onChangeText={text => this.setState({ weight:text })}
@@ -263,7 +410,6 @@ constructor(props){
               </View>
               <View>
                 <Text style={styles.card_detail_label}>Volume :</Text>
-              
                 <TextInput
                   style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
                   onChangeText={text => this.setState({ volume:text })}
@@ -272,13 +418,12 @@ constructor(props){
               </View>
               <View>
                 <Text style={styles.card_detail_label}>Carrier :</Text>
-               
                 <TextInput
                   style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
                   onChangeText={text => this.setState({ carrier:text })}
                   value={carrier}
                   />
-              </View>
+              </View> */}
             </View>
             {/* </View> */}
           </ScrollView>
@@ -286,6 +431,14 @@ constructor(props){
       </View>
     );
   };
+  componentWillMount() {
+    // setting navigation params to use it on the edit button
+    this.props.navigation.setParams({
+      changeEditMode: this.changeEditMode,
+      isInEditMode: this.state.isInEditMode
+    });
+  }
+
   render() {
     // console.log("proooooops", this.props.navigation.state.params);
     // // console.log('Detail flightData  =',flightData)
@@ -304,11 +457,37 @@ constructor(props){
       volume,
       carrier
     } = this.props.navigation.state.params.flightData;
-    return (
-      this.state.isInEditMode ? 
-      this.renderEditView(awb,from,to,status,depart,arrival,etd,eta,hwb,nbre,weight,volume,carrier):
-      this.renderDefaultView(awb,from,to,status,depart,arrival,etd,eta,hwb,nbre,weight,volume,carrier))
-  
+    return this.state.isInEditMode
+      ? this.renderEditView(
+          awb,
+          from,
+          to,
+          status,
+          depart,
+          arrival,
+          etd,
+          eta,
+          hwb,
+          nbre,
+          weight,
+          volume,
+          carrier
+        )
+      : this.renderDefaultView(
+          awb,
+          from,
+          to,
+          status,
+          depart,
+          arrival,
+          etd,
+          eta,
+          hwb,
+          nbre,
+          weight,
+          volume,
+          carrier
+        );
   }
 }
 const styles = StyleSheet.create({
@@ -438,8 +617,9 @@ const styles = StyleSheet.create({
     fontSize: 22
   },
   card_detail: {
+    flex: 1,
     marginBottom: "2%"
   }
 });
 
-export default FlightList;
+export default withNavigation(FlightList);
