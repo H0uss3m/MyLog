@@ -1,17 +1,25 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, AsyncStorage } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { withNavigation } from 'react-navigation';
+import {connect} from 'react-redux'
 class FlightList extends Component {
   
   handlePress = flightData => {
 
-    this.props.navigation.navigate("FlightItemDetail", {
-      flightData: flightData
-    });
+    if(this.props.userStatus ==='driverConnected'){
+      this.props.navigation.navigate("DriverJobDetails", {
+        flightData: flightData
+      });
+    }
+    else{
+      this.props.navigation.navigate("FlightItemDetail", {
+        flightData: flightData
+      });
+    }
    
   };
   render() {
-    // console.log('Item Id  =', this.props.item.id)
+    console.log('userStatus  =', this.props.userStatus)
     const {
       id,
       awb,
@@ -123,5 +131,11 @@ const styles = StyleSheet.create({
     fontSize: 12
   }
 });
+const MapStateToProps = state => {
+  // return state
+  return {
+    userStatus: state.toggleUserStatus.userStatus
+  }
+}
 
-export default withNavigation(FlightList);
+export default connect(MapStateToProps)(withNavigation(FlightList));

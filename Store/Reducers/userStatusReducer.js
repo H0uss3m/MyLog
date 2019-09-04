@@ -15,8 +15,8 @@ function toggleUserStatus (state = initialState, action) {
         userStatus: action.value
       }
       return nextState || state
-    case 'SET_ADMIN_STATUS':
-        nextState = {
+    case 'SET_DRIVER_STATUS':
+      nextState = {
         ...state,
         userStatus: action.value
       }

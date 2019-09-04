@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, FlatList, AsyncStorage } from 'react-native'
+import { View, StyleSheet, FlatList } from 'react-native'
 import FlightItem from '../FlightItem/FlightItem'
 // import { withNavigation } from 'react-navigation'
 import { connect } from 'react-redux'
@@ -21,8 +21,6 @@ class FlightList extends Component {
     }
     return (
       <View style={styles.flightList_container}>
-      
-        {/* <Text>this.props.SearchOptions : {this.props.SearchOptions}</Text> */}
         <FlatList
           data={filtredData}
           keyExtractor={(item, index) => item.id.toString()}

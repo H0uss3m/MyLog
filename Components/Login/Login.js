@@ -6,7 +6,7 @@ import { connect } from "react-redux"
 // user data 
 const userInfo={username:'user',password:'123456'} 
 const adminInfo={ username:'admin',password:'123456'} 
-
+const driverInfo={ username:'driver',password:'123456'}
 class Authentication extends Component {
 
     constructor(props) {
@@ -19,23 +19,29 @@ class Authentication extends Component {
    // check the type of user (admin , user , driver )
     checkLogin = () => {
         const { username, password } = this.state;
-        // console.log(username,' ',password)
-        // console.log(userInfo.username,' ',userInfo.password)
+    
       
         if(username.trim().toLocaleLowerCase()===adminInfo.username && password===adminInfo.password){
-            // Alert.alert('Welcome', username, [{ text: 'Ok' }])
             AsyncStorage.setItem('Logged',"adminConnected")
-            const userStatus=AsyncStorage.getItem('Logged') 
+
             let action = {type:'SET_ADMIN_STATUS',value:"adminConnected"}
-             this.props.dispatch(action)
-            this.props.navigation.navigate('App',{userStatus:userStatus});
+            this.props.dispatch(action)
+
+            this.props.navigation.navigate('App');
         }else if (username.trim().toLocaleLowerCase() === userInfo.username && password===userInfo.password ){
           AsyncStorage.setItem('Logged',"userConnected")
-          const userStatus=AsyncStorage.getItem('Logged')
-          // console.log('userStatus',userStatus) 
+
            let action = {type:'SET_USER_STATUS',value:"userConnected"}
            this.props.dispatch(action)
-          this.props.navigation.navigate('clientInterface',{userStatus:userStatus});
+
+          this.props.navigation.navigate('clientInterface');
+        }else if (username.trim().toLocaleLowerCase() === driverInfo.username && password===driverInfo.password ){
+          AsyncStorage.setItem('Logged','driverConnected')
+
+          let action = {type:'SET_DRIVER_STATUS',value:'driverConnected'}
+          this.props.dispatch(action)
+
+          this.props.navigation.navigate('DriverHomeScreen')
         }
         else{
             Alert.alert('Error', 'UserName/Login mismatch', [{ text: 'Ok' }])

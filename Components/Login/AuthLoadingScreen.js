@@ -18,7 +18,9 @@ class AuthLoadingScreen extends Component {
       // if the user is a simple user redirect to the admin screen
       case 'userConnected':
          return this.props.navigation.navigate( 'clientInterface')
-
+        break;
+      case 'driverConnected':
+         return this.props.navigation.navigate( 'driverInterface')
         break;
       // default Screen 'Login'
       default:

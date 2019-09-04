@@ -28,8 +28,8 @@ class FlightList extends Component {
   static navigationOptions = ({ navigation }) => {
     const { params } = navigation.state;
     // const {userStatus}=this.props.navigation.state.params
-    // console.log("***********userStatus**********",userStatus)
-// if(userStatus==='adminConnected'){
+    // console.log("***********userStatus**********",params.userStatus)
+if(params.userStatus==='adminConnected'){
   if (!params.isInEditMode ) {
     return {
       title: "Log Reference",
@@ -56,8 +56,13 @@ class FlightList extends Component {
           </TouchableOpacity>
         )
       };
-    // }
-  } 
+    }
+  } else if (params.userStatus === 'userConnected'){
+    return {
+      title: "Log Reference",
+      headerTitleStyle: { flex: 1, textAlign: "center" },
+      };
+  }
   };
   // handle edit mode
   changeEditMode = () => {
@@ -308,13 +313,13 @@ class FlightList extends Component {
                     style={{color:'red'}}
                     />
                    
-                    {/* <Button
+                    <Button
                     onPress={() => console.log("remove change ")}
                     style={{backgroundColor:'green',width:50}}
                     title="!"
-                  /> */}
+                  />
                     </View>
-                  {/* <Button
+                  <Button
                     onPress={() => console.log("save change ")}
                     title="V"
                   />
@@ -323,10 +328,10 @@ class FlightList extends Component {
                     onPress={() => console.log("remove change ")}
                     style={{ backgroundColor: "red" }}
                     title="!"
-                  /> */}
+                  />
                 </View>
               </View>
-              {/* <View style={styles.card_detail}>
+              <View style={styles.card_detail}>
                 <Text style={styles.card_detail_label}>Docking :</Text>
                 <TextInput
                   style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
@@ -407,7 +412,7 @@ class FlightList extends Component {
                   onChangeText={text => this.setState({ carrier:text })}
                   value={carrier}
                   />
-              </View> */}
+              </View>
             </View>
             {/* </View> */}
           </ScrollView>
@@ -421,7 +426,7 @@ class FlightList extends Component {
     this.props.navigation.setParams({
       changeEditMode: this.changeEditMode,
       isInEditMode: this.state.isInEditMode,
-      userStatus:AsyncStorage.getItem('Logged')
+      userStatus:this.props.userStatus
     });
   }
 

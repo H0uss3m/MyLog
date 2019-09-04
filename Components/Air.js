@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text,TouchableOpacity,AsyncStorage } from "react-native";
+import { View, StyleSheet} from "react-native";
 import FlightList from "./FlightList/FlightList";
 import data from './Data/data'
 import {connect} from 'react-redux'
