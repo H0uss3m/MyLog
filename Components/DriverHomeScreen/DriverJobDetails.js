@@ -4,14 +4,10 @@ import {
   Button,
   Text,
   StyleSheet,
-  ScrollView,
   Dimensions,
   TouchableOpacity,
-  AsyncStorage
 } from "react-native";
-import { Icon } from "react-native-elements";
 import { withNavigation } from "react-navigation";
-import { TextInput } from "react-native-gesture-handler";
 import { connect } from 'react-redux'
 
 
@@ -33,11 +29,7 @@ class FlightList extends Component {
         headerTitleStyle: { flex: 1, textAlign: "center" },
       }
   }
-  // handle edit mode
-
   render() {
-    // console.log("proooooops", this.props.navigation.state.params);
-    // // console.log('Detail flightData  =',flightData)
     const {
       awb,
       from,
@@ -99,42 +91,7 @@ class FlightList extends Component {
           </View>
         </View>
         <View style={styles.detail_box_body}>
-          <ScrollView
-            style={styles.scroll}
-            horizontal
-            pagingEnabled
-            showsHorizontalScrollIndicator={false}
-          >
-            {/* <View style={{width,height}}> */}
             <View style={styles.item_scroll_1}>
-              <View style={styles.card_detail}>
-                <Text style={styles.card_detail_label}>Pick Up :</Text>
-                <Text style={styles.card_detail_schedual}>
-                  {this.state.eta}
-                </Text>
-              </View>
-              <View style={styles.card_detail}>
-                <Text style={styles.card_detail_label}>Docking :</Text>
-                <Text style={styles.card_detail_schedual}>{eta}</Text>
-              </View>
-              <View style={styles.card_detail}>
-                <Text style={styles.card_detail_label}>Departure :</Text>
-                <Text style={styles.card_detail_schedual}>{eta}</Text>
-              </View>
-              <View style={styles.card_detail}>
-                <Text style={styles.card_detail_label}>Arrival :</Text>
-                <Text style={styles.card_detail_schedual}>{eta}</Text>
-              </View>
-              <View style={styles.card_detail}>
-                <Text style={styles.card_detail_label}>In Clearance :</Text>
-                <Text style={styles.card_detail_schedual}>{eta}</Text>
-              </View>
-              <View style={styles.card_detail}>
-                <Text style={styles.card_detail_label}>Delivery :</Text>
-                <Text style={styles.card_detail_schedual}>{eta}</Text>
-              </View>
-            </View>
-            <View style={styles.item_scroll}>
               <View>
                 <Text style={styles.card_detail_label}>House Way Bill :</Text>
                 <Text style={styles.card_detail_schedual}>{hwb}</Text>
@@ -156,8 +113,6 @@ class FlightList extends Component {
                 <Text style={styles.card_detail_schedual}>{carrier}</Text>
               </View>
             </View>
-            {/* </View> */}
-          </ScrollView>
         </View>
       </View>
     );
@@ -166,15 +121,11 @@ class FlightList extends Component {
 }
 const styles = StyleSheet.create({
   detail_box_header: {
-    // flex: 1,
     width: width * 0.84,
-    // marginLeft:15,
     borderColor: "#000000",
     borderWidth: 1,
     borderRadius: 12,
     overflow: "hidden"
-    // backgroundColor:'red'
-    // padding:5
   },
   main_container: {
     backgroundColor: "#d9d9d9",
@@ -185,37 +136,18 @@ const styles = StyleSheet.create({
     paddingHorizontal: 25
   },
   header_container: {
-    // borderColor: "grey",
-    // borderWidth: 1,
-    // borderRadius: 12,
-    // overflow: "hidden",
-    // flex: 1,
     backgroundColor: "grey",
-    // opacity:0.7,
     flexDirection: "row",
     justifyContent: "space-around",
     padding: 10
-    // borderRadius:50
   },
   flight_card: {
-    // flex: 1,
-    // flexDirection: 'row',
-    // justifyContent: 'space-around',
-    // textAlign:'center',
     backgroundColor: "#ffffff",
-
     padding: 10
   },
   flight_details: {
-    // flex: 2,
-    // textAlign:'center',
-    // borderRightColor: 'black',
-    // borderLeftColor: 'black',
-    // borderRightWidth: 2,
-    // borderLeftWidth: 2,
     padding: 10,
     flexDirection: "row"
-    // backgroundColor:'blue'
   },
   flight_schedual: {
     flexDirection: "row",
@@ -246,16 +178,12 @@ const styles = StyleSheet.create({
   },
   item: {
     marginRight: 15
-    // justifyContent:'space-between',
   },
   item_scroll_1: {
     padding: 11,
     marginLeft: 5,
     marginRight: 2,
-
     width: width * 0.835,
-    //   width,
-
     borderWidth: 1,
     backgroundColor: "#ffffff",
     borderRadius: 11
@@ -267,16 +195,12 @@ const styles = StyleSheet.create({
     marginRight: 5,
     marginLeft: 2,
     width: width * 0.84,
-    // width,
-
     borderWidth: 1,
     borderRadius: 11
   },
   detail_box_body: {
     flex: 1,
     flexDirection: "column",
-    //   justifyContent:"space-around",
-    //   backgroundColor: "red",
     padding: 5
   },
   scroll: {
