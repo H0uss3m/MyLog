@@ -150,7 +150,7 @@ const DriverStack = createStackNavigator({
         </TouchableOpacity>
       )
     })
-},
+  },
   DriverJobDetails: {
     screen: DriverJobDetails
   }

@@ -25,10 +25,10 @@ class FlightList extends Component {
     };
     this.defaultValue = "24/02/2015 at 15:14";
   }
-  static navigationOptions = ({ navigation }) => {
+static navigationOptions = ({ navigation }) => {
     return {
-      _title: "Job Details",
-      heade_TitleStyle: { flex: 1, textAlign: "center" }
+      title: "Job Details",
+      headerTitleStyle: { flex: 1, textAlign: "center" }
     };
   };
   render() {
