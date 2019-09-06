@@ -8,7 +8,8 @@ class Sea extends Component {
     super(props)
   
     this.state = {
-       data:[]
+       data:[],
+       meansOfTransport:'Vessel'
     }
   }
   
@@ -26,7 +27,7 @@ componentDidMount() {
   render() { 
     return (
       <View style={styles.main_container}>
-        <FlightList handlePress={this.handlePress} data={this.props.seaShipmentList} />
+        <FlightList handlePress={this.handlePress} meansOfTransport={this.state.meansOfTransport}  data={this.props.seaShipmentList} />
       </View>
     );
   }

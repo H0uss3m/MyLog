@@ -24,7 +24,7 @@ class FlightList extends Component {
         <FlatList
           data={filtredData}
           keyExtractor={(item, index) => item.id.toString()}
-          renderItem={({ item }) => <FlightItem item={item} />}
+          renderItem={({ item }) => <FlightItem meansOfTransport={this.props.meansOfTransport} item={item} />}
         />
       </View>
     )

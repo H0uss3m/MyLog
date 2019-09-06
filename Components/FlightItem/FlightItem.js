@@ -19,7 +19,7 @@ class FlightList extends Component {
    
   };
   render() {
-    console.log('userStatus  =', this.props.userStatus)
+    // console.log('userStatus  =', this.props.userStatus)
     const {
       id,
       awb,
@@ -33,7 +33,7 @@ class FlightList extends Component {
       flight1,
       flight2
     } = this.props.item;
-
+    const {meansOfTransport}=this.props
   
     // console.log('this.props.item',this.props.item)
     return (
@@ -71,9 +71,9 @@ class FlightList extends Component {
               <Text style={styles.card_text}>{weight} Kg</Text>
             </View>
             <View style={{ flex: 2, marginLeft: 20 }}>
-              <Text style={styles.card_label}>Flight 1:</Text>
+              <Text style={styles.card_label}>{meansOfTransport} 1:</Text>
               <Text style={styles.card_text}>TK {flight1}</Text>
-              <Text style={styles.card_label}>Flight 2:</Text>
+              <Text style={styles.card_label}>{meansOfTransport} 2:</Text>
               <Text style={styles.card_text}>TK {flight2}</Text>
             </View>
           </View>

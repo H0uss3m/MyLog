@@ -9,7 +9,8 @@ class Air extends Component {
     super(props)
   
     this.state = {
-       data:[]
+       data:[],
+       meansOfTransport:'Flight'
     }
   }
   
@@ -27,7 +28,7 @@ componentDidMount() {
   render() { 
     return (
       <View style={styles.main_container}>
-        <FlightList handlePress={this.handlePress}  data={this.props.airShipmentList} />
+        <FlightList handlePress={this.handlePress} meansOfTransport={this.state.meansOfTransport}  data={this.props.airShipmentList} />
       </View>
     );
   }

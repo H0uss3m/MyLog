@@ -4,12 +4,12 @@ import AppNavigator from './Navigation/Navigation'
 import { Provider } from 'react-redux'
 import Store from './Store/configureStore'
 function App () {
-  return (<Provider store={Store}>
-
-    <View style={styles.container}>
-      <AppNavigator />
-    </View>
-  </Provider>
+  return (
+    <Provider store={Store}>
+      <View style={styles.container}>
+        <AppNavigator />
+      </View>
+    </Provider>
   )
 }
 
